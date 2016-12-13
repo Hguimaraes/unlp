@@ -1,5 +1,5 @@
-#ifndef PARSER_H_
-#define PARSER_H_
+#ifndef FUNCTIONS_H_
+#define FUNCTIONS_H_
 
 #include <cmath>
 #include <vector>
@@ -14,9 +14,9 @@ namespace unlp{
 
 /**
  * @Description: 
- *  Class to handle user input from terminal
+ *  Abstract Class to represent the mathematical functions of this assignment
  */
-class InputParser {
+class Functions {
     
 };
 

@@ -1,11 +1,12 @@
-#ifndef PARSER_H_
-#define PARSER_H_
+#ifndef NLB_FUNCTIONS_H_
+#define NLB_FUNCTIONS_H_
 
 #include <cmath>
 #include <vector>
 #include <iostream>
 #include <algorithm>
 
+#include "functions.h"
 #include "linalg/matrix.h"
 
 using namespace std;
@@ -14,9 +15,9 @@ namespace unlp{
 
 /**
  * @Description: 
- *  Class to handle user input from terminal
+ *  Class to represent the mathematical function (B) of this assignment
  */
-class InputParser {
+class NLBFunction : public Functions {
     
 };
 
