@@ -18,8 +18,9 @@ namespace unlp{
  * homework.
  */
 
-Matrix identity(unsigned dim);
-
+unlp::Matrix identity(unsigned dim);
+unlp::Matrix inv(unlp::Matrix x);
+double dot(unlp::Matrix x, unlp::Matrix y);
 }
 
 #endif
