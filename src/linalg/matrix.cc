@@ -2,7 +2,6 @@
 
 namespace unlp {
 
-
 Matrix::Matrix(unsigned m, unsigned n, double value): m(m), n(n) {
   v = vector< vector<double> >(m, vector<double>(n, value));
 }
@@ -57,31 +56,63 @@ void Matrix::printMatrix() const {
 }
 
 unsigned Matrix::getCols() const {
-  return m;
-}
-
-unsigned Matrix::getRows() const {
   return n;
 }
 
-Matrix Matrix::operator+(const Matrix&) const {
-
+unsigned Matrix::getRows() const {
+  return m;
 }
 
-Matrix Matrix::operator-(const Matrix&) const {
-
+Matrix Matrix::operator+(const Matrix& o) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) + o.at(i,j));
+  return a;
 }
 
-Matrix Matrix::operator*(const Matrix&) const {
-
+Matrix Matrix::operator-(const Matrix& o) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) - o.at(i,j));
+  return a;
 }
 
-Matrix Matrix::operator*(double) const {
-
-}
-
-Matrix Matrix::operator/(double) const {
+Matrix Matrix::operator*(const Matrix& o) const {
+  Matrix w(getRows(), o.getCols());
   
+  // Check the dimensions
+  if (getCols() != o.getRows())
+    throw std::invalid_argument("ERROR: Invalid matrix multiplication");
+  
+  for (unsigned i = 1; i <= getRows(); ++i){
+    for (unsigned j = 1; j <= o.getCols(); ++j) {
+      double sum = 0.0;
+      for (unsigned k = 1; k <= getCols(); ++k) {
+        sum += at(i,k) * o.at(k,j);
+      }
+      w.set(i,j,sum);
+    }
+  }
+
+  return w;
+}
+
+Matrix Matrix::operator*(double k) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) * k);
+  return a;
+}
+
+Matrix Matrix::operator/(double k) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) / k);
+  return a;
 }
 
 }

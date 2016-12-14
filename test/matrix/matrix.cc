@@ -2,30 +2,24 @@
 
 namespace unlp {
 
-// OK
 Matrix::Matrix(unsigned m, unsigned n, double value): m(m), n(n) {
   v = vector< vector<double> >(m, vector<double>(n, value));
 }
 
-// OK
 Matrix::Matrix(const vector<double>& o): m(o.size()), n(1) {
   for (int i = 0; i < o.size(); ++i)
     v.push_back(vector<double>(1, o[i]));
 }
 
-// OK
 Matrix::Matrix(const vector<vector<double> >& o): 
   m(o.size()), n(o[0].size()), v(o)
 {
 }
 
-// OK
 void Matrix::set(unsigned i, unsigned j, double value) {
   v[i-1][j-1] = value;
 }
 
-
-// OK
 Matrix Matrix::t() const {
   Matrix w(getCols(), getRows());
   for (unsigned i = 1; i <= getRows(); ++i)
@@ -62,10 +56,63 @@ void Matrix::printMatrix() const {
 }
 
 unsigned Matrix::getCols() const {
-  return m;
+  return n;
 }
 
 unsigned Matrix::getRows() const {
-  return n;
+  return m;
 }
+
+Matrix Matrix::operator+(const Matrix& o) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) + o.at(i,j));
+  return a;
+}
+
+Matrix Matrix::operator-(const Matrix& o) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) - o.at(i,j));
+  return a;
+}
+
+Matrix Matrix::operator*(const Matrix& o) const {
+  Matrix w(getRows(), o.getCols());
+  
+  // Check the dimensions
+  if (getCols() != o.getRows())
+    throw std::invalid_argument("ERROR: Invalid matrix multiplication");
+  
+  for (unsigned i = 1; i <= getRows(); ++i){
+    for (unsigned j = 1; j <= o.getCols(); ++j) {
+      double sum = 0.0;
+      for (unsigned k = 1; k <= getCols(); ++k) {
+        sum += at(i,k) * o.at(k,j);
+      }
+      w.set(i,j,sum);
+    }
+  }
+
+  return w;
+}
+
+Matrix Matrix::operator*(double k) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) * k);
+  return a;
+}
+
+Matrix Matrix::operator/(double k) const {
+  Matrix a(m, n);
+  for (unsigned i = 1; i <= m; ++i)
+    for (unsigned j = 1; j <= n; ++j)
+      a.set(i, j, at(i,j) / k);
+  return a;
+}
+
 }

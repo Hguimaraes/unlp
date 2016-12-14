@@ -34,11 +34,11 @@ class Matrix {
     void set(unsigned i, unsigned j, double value);
 
     // Usual matrix operations.
-    //Matrix operator+(const Matrix&) const;
-    //Matrix operator-(const Matrix&) const;
-    //Matrix operator*(const Matrix&) const;
-    //Matrix operator*(double) const;
-    //Matrix operator/(double) const;
+    Matrix operator+(const Matrix&) const;
+    Matrix operator-(const Matrix&) const;
+    Matrix operator*(const Matrix&) const;
+    Matrix operator*(double) const;
+    Matrix operator/(double) const;
 
     // Return the transpose of the matrix
     Matrix t() const;
