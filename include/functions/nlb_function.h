@@ -18,7 +18,13 @@ namespace unlp{
  *  Class to represent the mathematical function (B) of this assignment
  */
 class NLBFunction : public Functions {
-    
+  long double secondOrderDerivative(Matrix points);
+  double secondOrderMixedDerivative(Matrix points);
+  
+  public:
+    double function(Matrix points);
+    Matrix gradient(Matrix points);
+    Matrix hessian(Matrix points);
 };
 
 }

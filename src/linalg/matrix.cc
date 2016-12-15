@@ -35,7 +35,7 @@ double Matrix::det2() const {
 }
 
 double Matrix::at(unsigned i) const {
- if(n == 1) return v[i][0];
+ if(n == 1) return v[i-1][0];
  else
   throw std::invalid_argument("ERROR: This is not a row or column vector");
 }
