@@ -2,7 +2,6 @@
 #include <vector>
 #include <cmath>
 
-#define VERBOSE true
 #define NI 0.25
 #define GAMMA 0.8
 
